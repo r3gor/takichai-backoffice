@@ -8,10 +8,10 @@ export const environment = {
   STAGE: 'DEV',
 
   API: {
-    BE: '',
-    RECOMENDATIONS: '',
+    BE: 'https://takichai-backend.herokuapp.com/api',
+    RECOMENDATIONS: 'https://takichai-recommendations.herokuapp.com',
   }
-  
+
 };
 
 /*

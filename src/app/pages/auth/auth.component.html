@@ -1,1 +1,20 @@
-<p>auth works!</p>
+
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-subtitle>Admins</mat-card-subtitle>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="standard">
+        <mat-label>User</mat-label>
+        <input matInput [formControl]="user">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="password">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button type="submit" (click)="submit()" mat-button>Submit</button>
+  </mat-card-actions>
+</mat-card>
