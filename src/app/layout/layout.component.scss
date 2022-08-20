@@ -21,9 +21,12 @@ main {
 
 header {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 9999999999999;
 }
 
-.btn-person {
+.ml-auto {
   margin-left: auto;
 }
 

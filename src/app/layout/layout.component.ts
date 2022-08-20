@@ -2,6 +2,7 @@ declare const DZ: any;
 
 import { Component, OnInit } from '@angular/core';
 import { SidenavService } from '../core/services/ui/sidenav.service';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-layout',
@@ -10,7 +11,9 @@ import { SidenavService } from '../core/services/ui/sidenav.service';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(public sidenavService: SidenavService) {
+  constructor(
+    public sidenavService: SidenavService,
+    public userService: UserService) {
   }
 
   ngOnInit(): void {

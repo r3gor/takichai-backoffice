@@ -10,6 +10,7 @@ import { FontAwesomeInit } from './core/initializers/font-awesome.init';
 import { HeadersInterceptor } from './core/interceptors/headers.interceptor';
 import { HttpStatusInterceptor } from './core/interceptors/http-status.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SessionRecoverInitializer } from './core/initializers/session-recover.init';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       provide: APP_INITIALIZER,
       useFactory: makeFactory<FontAwesomeInit>(),
       deps: [FontAwesomeInit],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: makeFactory<SessionRecoverInitializer>(),
+      deps: [SessionRecoverInitializer],
       multi: true
     },
     {

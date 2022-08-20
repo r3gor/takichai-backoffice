@@ -15,8 +15,8 @@ export class MenuComponent implements OnInit {
 
   items = [
     { key: 'dash', routerLink: ['/'], label: 'Dashboard', icon: 'home'},
-    { key: 'users', routerLink: ['/', 'users'], label: 'Users', icon: 'home' },
-    { key: 'songs', routerLink: ['/', 'songs'], label: 'Songs', icon: 'home'},
+    { key: 'users', routerLink: ['/', 'users'], label: 'Users', icon: 'people' },
+    { key: 'songs', routerLink: ['/', 'songs'], label: 'Songs', icon: 'library_music'},
   ]
 
   constructor(

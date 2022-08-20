@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Edit</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="row mt-5" [formGroup]="form">
+    <ng-container *ngFor="let field of data.fields">
+      <ng-container [ngSwitch]="field.type">
+
+        <p class="radio" *ngSwitchCase="'radio'">
+          <mat-label>{{field.label}}</mat-label>
+          <mat-radio-group [formControlName]="field.key">
+            <mat-radio-button *ngFor="let o of field.options" [value]="o.value">
+              {{o.label}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
+
+        <p *ngSwitchCase="'text'">
+          <mat-form-field>
+            <mat-label>{{field.label}}</mat-label>
+            <input matInput [formControlName]="field.key">
+            <mat-hint>{{field.hint}}</mat-hint>
+          </mat-form-field>
+        </p>
+      
+        <p *ngSwitchCase="'select'">
+          <mat-form-field>
+            <mat-label>{{field.label}}</mat-label>
+            <mat-select [formControlName]="field.key">
+              <mat-option *ngFor="let o of field.options" [value]="o.value">
+                {{o.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+      </ng-container>
+    </ng-container>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="form.value" (click)="submit()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

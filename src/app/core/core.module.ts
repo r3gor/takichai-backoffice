@@ -5,6 +5,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EditPanelComponent } from './components/edit-panel/edit-panel.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [
     BreakpointPipe,
     MenuComponent,
+    EditPanelComponent,
   ],
   exports: [
     MenuComponent,
@@ -20,6 +23,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     FontAwesomeModule,
   ]

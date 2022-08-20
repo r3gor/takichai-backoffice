@@ -9,6 +9,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -23,6 +27,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatCardModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatSelectModule,
   ]
 })
 export class MaterialModule { }

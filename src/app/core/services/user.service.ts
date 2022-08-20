@@ -3,6 +3,7 @@ import { BehaviorSubject, filter, Observable, of, tap } from 'rxjs';
 import { LS } from '../utils/local-storage.utils';
 import { HttpUsersService } from './http/http-users.service';
 import { IUser } from '../interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,17 @@ export class UserService {
   private user   = new BehaviorSubject<IUser | undefined>(undefined);
 
   loggedIn$ = this.loggedIn.asObservable();
-  player$ = this.user.asObservable().pipe(
+  user$ = this.user.asObservable().pipe(
     filter((s): s is IUser => s !== undefined)
   );
 
-  constructor(private httpUser: HttpUsersService) {
+  constructor(
+    private httpUserService: HttpUsersService,
+    private router: Router) {
   }
 
   login(user: string, password: string) {
-    return this.httpUser.postLogin({email: user, password}).pipe(
+    return this.httpUserService.postLogin({email: user, password}).pipe(
       tap(res => {
         
         if (!res.ok) {
@@ -31,6 +34,7 @@ export class UserService {
 
         LS.setItem('token', res.token)
         this.user.next(res.user)
+        this.loggedIn.next(true);
         return of(true);
       })
     )
@@ -41,8 +45,14 @@ export class UserService {
     this.loggedIn.next(false);
     // TODO: Caducar el token en el backend
     // TODO: Eliminar cache del player (behavior subject de player.service)
-  
+    this.router.navigate(['/', 'auth'])
     return of(true);
+  }
+
+  fetchUser() {
+    return this.httpUserService.getLoggedUser().pipe(
+      tap(res => !!res.user && this.user.next(res.user))
+    );
   }
 
   onRecoverSession(): void {
@@ -54,9 +64,9 @@ export class UserService {
   }
   
   /**
-   * @returns Player en cache
+   * @returns User en cache
   */
-  getPlayer(): IUser | undefined {
+  getUser(): IUser | undefined {
     return this.user.getValue();
   }
 
