@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatRadioModule,
     MatSelectModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

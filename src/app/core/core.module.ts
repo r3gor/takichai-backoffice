@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditPanelComponent } from './components/edit-panel/edit-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingHttpComponent } from './components/loading-http/loading-http.component';
 
 
 
@@ -15,10 +16,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BreakpointPipe,
     MenuComponent,
     EditPanelComponent,
+    LoadingHttpComponent,
   ],
   exports: [
     MenuComponent,
     BreakpointPipe,
+    LoadingHttpComponent,
   ],
   imports: [
     CommonModule,

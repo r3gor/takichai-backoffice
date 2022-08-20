@@ -11,6 +11,7 @@ import { HeadersInterceptor } from './core/interceptors/headers.interceptor';
 import { HttpStatusInterceptor } from './core/interceptors/http-status.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SessionRecoverInitializer } from './core/initializers/session-recover.init';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SessionRecoverInitializer } from './core/initializers/session-recover.i
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
+    CoreModule,
   ],
   providers: [
     {
