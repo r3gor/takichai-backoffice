@@ -1,0 +1,33 @@
+
+
+<mat-sidenav-container>
+  <mat-sidenav
+  [opened]="sidenavService.opened$ | async" 
+  (closed)="closeSidenav()" 
+  [mode]="(['xs'] | breakpoint | async)? 'over':'side'">
+    <app-menu></app-menu>
+  </mat-sidenav>
+  
+  <header>
+    <mat-toolbar>
+      <ng-container *ngIf="!(sidenavService.opened$ | async)">
+        <button mat-icon-button (click)="sidenavService.open()">
+          <mat-icon>menu</mat-icon>
+         </button>
+        <h1>Takichai Backoffice</h1>
+      </ng-container>
+      <button class="btn-person" mat-icon-button>
+        <mat-icon>person</mat-icon>
+      </button>
+   </mat-toolbar>
+  </header>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+</mat-sidenav-container>
+
+<div class="footer">
+  <!-- <app-music-player></app-music-player> -->
+</div>

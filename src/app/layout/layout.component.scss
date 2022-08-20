@@ -1,0 +1,41 @@
+@import 'breakpoints';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-sidenav-container {
+  flex-grow: 1;
+}
+
+app-menu, main {
+  padding-bottom: 116px;
+}
+
+main {
+  height: 100%;
+  padding: 20px 50px;
+}
+
+header {
+  display: flex;
+}
+
+.btn-person {
+  margin-left: auto;
+}
+
+.center-container {
+  padding: 0 100px;
+}
+
+.footer {
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 123;
+}

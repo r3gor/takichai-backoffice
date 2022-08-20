@@ -1,0 +1,17 @@
+<div class="title">
+  <h2 class="mat-title">Takichai Backoffice</h2>
+
+  <button mat-icon-button 
+  (click)="sidenavService.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-action-list>
+  <button *ngFor="let item of items" mat-list-item [routerLink]="item.routerLink" color="primary">
+    <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+    <span matLine>{{ item.label }}</span>
+  </button>
+</mat-action-list>
