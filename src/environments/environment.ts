@@ -3,15 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  
   STAGE: 'DEV',
 
   API: {
     BE: 'https://takichai-backend.herokuapp.com/api',
     RECOMENDATIONS: 'https://takichai-recommendations.herokuapp.com',
   }
-
 };
 
 /*
