@@ -1,10 +1,11 @@
 import { Inject, Injectable } from "@angular/core";
-import { map, Observable, of, tap, switchMap } from 'rxjs';
+import { map, Observable, of, tap, switchMap, catchError } from 'rxjs';
 import { LS } from "../utils/local-storage.utils";
 import { LOG } from "../utils/log.utils";
 import { Initializer } from "./abstract-initializer";
 import { UserService } from "../services/user.service";
 import { HttpUsersService } from '../services/http/http-users.service';
+import { HttpErrorResponse } from "@angular/common/http";
 
 
 @Injectable({
@@ -37,7 +38,7 @@ export class SessionRecoverInitializer implements Initializer{
     
     // Check: Se validan las variables haciendo una consulta de prueba
     return this.userService.fetchUser().pipe(
-      map( res => !!res.user )
+      map( res => !!res.user ),
     );
   }
 }

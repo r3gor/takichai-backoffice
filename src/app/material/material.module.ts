@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatRadioModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }

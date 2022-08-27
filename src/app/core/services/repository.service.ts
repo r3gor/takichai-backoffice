@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, filter, of, tap } from 'rxjs';
+import { BehaviorSubject, filter, of, tap, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { HttpUsersService } from './http/http-users.service';
 
@@ -19,20 +19,23 @@ export class RepositoryService {
     filter((s): s is any => s !== undefined)
   );
 
-  constructor(private httpUsers: HttpUsersService) {
+  constructor(
+    private httpUsers: HttpUsersService) {
   }
 
   fetchUsers() {
     return this.httpUsers.getItems().pipe(
-      tap(data => {
-        if (!data) return;
-        this.users.next(data);
-      }),
+      tap(data => data && this.users.next(data)),
+    )
+  }
+
+  patchUser(userId: string, payload: any) {
+    return this.httpUsers.patchUser(userId, payload).pipe(
+      switchMap(res => res? this.fetchUsers() : of(false)),
     )
   }
 
   getUsers() {
     return this.users.getValue();
   }
-
 }

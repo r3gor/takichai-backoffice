@@ -6,6 +6,7 @@ import { IUser } from '../../core/interfaces/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPanelComponent } from 'src/app/core/components/edit-panel/edit-panel.component';
 import { editFields } from './edit.fields';
+import { SnackMsgService } from 'src/app/core/services/ui/snack-msg.service';
 
 @Component({
   selector: 'app-users',
@@ -21,6 +22,7 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private repoService: RepositoryService,
+    private snackService: SnackMsgService,
     private dialog: MatDialog) {
     this.repoService.fetchUsers().subscribe();
   }
@@ -30,8 +32,13 @@ export class UsersComponent implements OnInit {
       item: this.selectedItem, fields: editFields
     } });
 
-    editDialog.afterClosed().subscribe(formValue => {
-      console.log("value:", formValue);
+    editDialog.afterClosed().subscribe(data => {
+      if (data.action === "CANCEL") return;
+      const formValue = data.value;
+      this.repoService.patchUser(this.selectedItem.userId, formValue).subscribe(
+        res => res? 
+        this.snackService.msg("User updated", 'success') : 
+        this.snackService.msg("User update failed", 'error'))
     });
   }
 

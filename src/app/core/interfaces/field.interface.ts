@@ -10,6 +10,8 @@ export interface IField {
   validators? : ValidatorFn[];
   disabled?   : boolean;
   hint?: string;
+  optionalField?: boolean;
+  optionalFieldLabel?: string;
 }
 
 // TODO: DEBE SER EL MISMO DEL TYPE CONFIG

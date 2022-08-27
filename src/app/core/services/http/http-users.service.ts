@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from "src/environments/environment";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { map, tap } from 'rxjs';
-import { IGeneralRes } from "../../interfaces/general.interface";
+import { map, Observable, of, tap, catchError } from 'rxjs';
 import { ILoginRes } from "../../interfaces/login-response.interface";
 import { IGetUsers } from "../../interfaces/get-users.interface";
+import { LOG } from '../../utils/log.utils';
+import { JSON2Formdata } from "../../utils/json-to-formdata.utils";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,7 @@ export class HttpUsersService {
   API = `${environment.API.BE}`
 
   constructor(
-    private http: HttpClient,
-    private snackBar: MatSnackBar) {
+    private http: HttpClient) {
   }
 
   postLogin(payload: {email: string, password: string}) {
@@ -39,24 +38,31 @@ export class HttpUsersService {
   patchUser(userId: string, payload: any) {
     const URL = `${this.API}/users/${userId}`;
 
-    // data = new FormData()
+    const data = JSON2Formdata(payload); 
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    // return this.http.put(URL, )
-
+    return this.http.put<any>(URL, data, { headers }).pipe(
+      tap(res => this.msg("Users loaded", res.ok? 'success':'error')),
+      catchError(this.handleError('Patch User', false)),
+    );
   }
 
   getLoggedUser() {
     const URL = `${this.API}/user`;
 
-    return this.http.get<any>(URL);
+    return this.http.get<any>(URL).pipe(
+      catchError(this.handleError('Get Logged User', false)),
+    );
   }
 
   msg(msg: string, type: 'success' | 'info' | 'error') {
-    this.snackBar.open(msg, 'Close', {
-      horizontalPosition: "center",
-      verticalPosition: 'top',
-      duration: 3000,
-    });
+    LOG.msg(msg, type);
   }
 
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: HttpErrorResponse): Observable<T> => {
+      LOG.msg(`${operation} failed: ${error.error.msg}`, 'error');
+      return of(result as T);
+    };
+  }
 }

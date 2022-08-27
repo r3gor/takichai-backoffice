@@ -31,7 +31,7 @@ export class UserService {
           this.loggedIn.next(false);
           return of(false);
         }
-
+        
         LS.setItem('token', res.token)
         this.user.next(res.user)
         this.loggedIn.next(true);
@@ -69,5 +69,4 @@ export class UserService {
   getUser(): IUser | undefined {
     return this.user.getValue();
   }
-
 }
