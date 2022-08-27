@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpUsersService } from 'src/app/core/services/http/http-users.service';
 import { RepositoryService } from '../../core/services/repository.service';
 import { Observable } from 'rxjs';
@@ -18,12 +18,11 @@ import { detailsFields } from './details.fields';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  users$: Observable<IUser[]> = this.repoService.users$;
-  displayedColumns: string[] = ['publicProfile', 'name', 'email', 'createdAt', 'updatedAt', 'actions'];
-  dataSource?: MatTableDataSource<IUser> = undefined;
+  displayedColumns: string[] = ['publicProfile', 'name', 'email', 'songs', 'suscribers', 'suscriptions', 'createdAt', 'updatedAt', 'actions'];
+  dataSource = new MatTableDataSource<IUser>();
 
   selectedItem: any;
 
@@ -32,16 +31,24 @@ export class UsersComponent implements OnInit {
     private snackService: SnackMsgService,
     private dialog: MatDialog) {
 
+    this.repoService.users$.subscribe(users => {
+      this.dataSource.data = users;
+    })
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  refresh() {
     this.repoService.fetchUsers().subscribe(
       ok => ok?
         this.snackService.msg("Users loaded", 'success') :
         this.snackService.msg("Load users failed", 'error')
     )
-
-    this.repoService.users$.subscribe(users => {
-      this.dataSource = new MatTableDataSource<IUser>(users);
-      this.dataSource.paginator = this.paginator;
-    })
   }
 
   edit() {
@@ -77,9 +84,6 @@ export class UsersComponent implements OnInit {
         this.snackService.msg("Fail delete user", 'error')
       );
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }

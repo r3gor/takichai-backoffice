@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, filter, of, tap, switchMap, map } from 'rxjs';
+import { BehaviorSubject, filter, of, tap, switchMap, map, forkJoin } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { HttpUsersService } from './http/http-users.service';
 import { HttpSongsService } from './http/http-songs.service';
@@ -23,6 +23,15 @@ export class RepositoryService {
   constructor(
     private httpUsers: HttpUsersService,
     private httpSongs: HttpSongsService,) {
+  }
+
+  fetchAll() {
+    return forkJoin({
+      okusers: this.fetchUsers(),
+      oksongs: this.fetchSongs(),
+    }).pipe(
+      map(({okusers, oksongs}) => okusers && oksongs )
+    )
   }
 
   fetchUsers() {

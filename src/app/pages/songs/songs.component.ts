@@ -15,12 +15,11 @@ import { detailsFields } from './details.fields';
   templateUrl: './songs.component.html',
   styleUrls: ['./songs.component.scss']
 })
-export class SongsComponent implements OnInit {
+export class SongsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  songs$: Observable<ISong[]> = this.repoService.songs$;
-  displayedColumns: string[] = ['name', 'year', 'genre', 'instrumental', 'mood', 'actions'];
-  dataSource?: MatTableDataSource<ISong> = undefined;
+  displayedColumns: string[] = ['name', 'reproductions', 'fullReproductions', 'likes', 'year', 'genre', 'instrumental', 'mood', 'actions'];
+  dataSource = new MatTableDataSource<ISong>();
   selectedItem: any;
 
   constructor(
@@ -28,17 +27,24 @@ export class SongsComponent implements OnInit {
     private snackService: SnackMsgService,
     private dialog: MatDialog) {
 
+    this.repoService.songs$.subscribe(songs => {
+      this.dataSource.data = songs;
+    })
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  refresh() {
     this.repoService.fetchSongs().subscribe(
       ok => ok?
       this.snackService.msg("Songs loaded", 'success') :
       this.snackService.msg("Load songs failed", 'error')
     );
-
-    this.repoService.songs$.subscribe(songs => {
-      this.dataSource = new MatTableDataSource<ISong>(songs);
-      this.dataSource.paginator = this.paginator;
-    })
-
   }
 
   details() {
@@ -60,8 +66,4 @@ export class SongsComponent implements OnInit {
       );
     });
   }
-
-  ngOnInit(): void {
-  }
-
 }
