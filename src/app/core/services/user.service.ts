@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, Observable, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, filter, of, tap } from 'rxjs';
+import { IUser } from '../interfaces/user.interface';
 import { LS } from '../utils/local-storage.utils';
 import { HttpUsersService } from './http/http-users.service';
-import { IUser } from '../interfaces/user.interface';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

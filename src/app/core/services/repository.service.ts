@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, filter, of, tap, switchMap } from 'rxjs';
+import { BehaviorSubject, filter, of, tap, switchMap, map } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { HttpUsersService } from './http/http-users.service';
+import { HttpSongsService } from './http/http-songs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +21,41 @@ export class RepositoryService {
   );
 
   constructor(
-    private httpUsers: HttpUsersService) {
+    private httpUsers: HttpUsersService,
+    private httpSongs: HttpSongsService,) {
   }
 
   fetchUsers() {
     return this.httpUsers.getItems().pipe(
       tap(data => data && this.users.next(data)),
+      map(data => !!data),
     )
   }
 
-  patchUser(userId: string, payload: any) {
-    return this.httpUsers.patchUser(userId, payload).pipe(
-      switchMap(res => res? this.fetchUsers() : of(false)),
+  fetchSongs() {
+    return this.httpSongs.getItems().pipe(
+      tap(data => data && this.songs.next(data)),
+      map(data => !!data),
     )
   }
 
   getUsers() {
     return this.users.getValue();
+  }
+
+  getSongs() {
+    return this.songs.getValue();
+  }
+
+  deleteSong(id: string) {
+    return this.httpSongs.deleteItem(id).pipe(
+      switchMap(res => res? this.fetchSongs() : of(false)),
+    )
+  }
+  
+  patchUser(userId: string, payload: any) {
+    return this.httpUsers.patchUser(userId, payload).pipe(
+      switchMap(res => res? this.fetchUsers() : of(false)),
+    )
   }
 }

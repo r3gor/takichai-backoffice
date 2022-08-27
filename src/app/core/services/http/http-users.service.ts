@@ -27,11 +27,12 @@ export class HttpUsersService {
   }
 
   getItems() {
-    const URL = `${this.API}/users`;
+    const URL = `${this.API}/users?limit=0&from=0`;
     
     return this.http.get<IGetUsers>(URL).pipe(
       tap(res => this.msg("Users loaded", res.ok? 'success':'error')),
-      map(res => res.users)
+      map(res => res.users),
+      catchError(this.handleError('Get Users', [])),
     )
   }
 

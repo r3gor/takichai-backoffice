@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditPanelComponent } from './components/edit-panel/edit-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingHttpComponent } from './components/loading-http/loading-http.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -17,6 +18,7 @@ import { LoadingHttpComponent } from './components/loading-http/loading-http.com
     MenuComponent,
     EditPanelComponent,
     LoadingHttpComponent,
+    ConfirmDialogComponent,
   ],
   exports: [
     MenuComponent,

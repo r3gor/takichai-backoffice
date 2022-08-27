@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SongsRoutingModule } from './songs-routing.module';
 import { SongsComponent } from './songs.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SongsComponent } from './songs.component';
   ],
   imports: [
     CommonModule,
-    SongsRoutingModule
+    SongsRoutingModule,
+    MaterialModule,
   ]
 })
 export class SongsModule { }
