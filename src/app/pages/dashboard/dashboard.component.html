@@ -14,7 +14,7 @@
 
 <mat-card *ngIf="topPosters$ | async as topPosters">
   <mat-card-title>TOP Artits</mat-card-title>
-  <mat-card-subtitle>Biggest songs uploaded</mat-card-subtitle>
+  <mat-card-subtitle>Most songs uploaded</mat-card-subtitle>
   
   <mat-list>
     <mat-list-item *ngFor="let p of topPosters.slice(0, 5)">
