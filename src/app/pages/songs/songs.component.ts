@@ -4,9 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/core/components/confirm-dialog/confirm-dialog.component';
+import { DetailsDialogComponent } from 'src/app/core/components/details-dialog/details-dialog.component';
 import { ISong } from 'src/app/core/interfaces/get-songs.interface';
 import { RepositoryService } from 'src/app/core/services/repository.service';
 import { SnackMsgService } from 'src/app/core/services/ui/snack-msg.service';
+import { detailsFields } from './details.fields';
 
 @Component({
   selector: 'app-songs',
@@ -31,7 +33,7 @@ export class SongsComponent implements OnInit {
       this.snackService.msg("Songs loaded", 'success') :
       this.snackService.msg("Load songs failed", 'error')
     );
-    
+
     this.repoService.songs$.subscribe(songs => {
       this.dataSource = new MatTableDataSource<ISong>(songs);
       this.dataSource.paginator = this.paginator;
@@ -39,8 +41,13 @@ export class SongsComponent implements OnInit {
 
   }
 
+  details() {
+    this.dialog.open(DetailsDialogComponent, { data: {
+      item: this.selectedItem, fields: detailsFields
+    } });
+  }
+
   delete(songId: string) {
-    console.log("delete: ", songId);
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
     dialogRef.afterClosed().subscribe(data => {

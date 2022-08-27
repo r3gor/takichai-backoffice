@@ -52,6 +52,12 @@ export class RepositoryService {
       switchMap(res => res? this.fetchSongs() : of(false)),
     )
   }
+
+  deleteUser(id: string) {
+    return this.httpUsers.deleteItem(id).pipe(
+      switchMap(res => res? this.fetchUsers() : of(false)),
+    )
+  }
   
   patchUser(userId: string, payload: any) {
     return this.httpUsers.patchUser(userId, payload).pipe(

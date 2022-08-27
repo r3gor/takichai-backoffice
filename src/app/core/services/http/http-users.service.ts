@@ -36,6 +36,15 @@ export class HttpUsersService {
     )
   }
 
+  deleteItem(id: string) {
+    const URL = `${this.API}/users/${id}`;
+
+    return this.http.delete<any>(URL).pipe(
+      tap(res => this.msg("Users loaded", res.ok? 'success':'error')),
+      catchError(this.handleError('Get Users', false)),
+    )
+  }
+
   patchUser(userId: string, payload: any) {
     const URL = `${this.API}/users/${userId}`;
 

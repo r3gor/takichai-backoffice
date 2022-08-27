@@ -1,0 +1,23 @@
+form {
+  min-width: 400px;
+}
+
+.radio {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-radio-group {
+  display: flex;
+  gap: 16px;
+  justify-content: end;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-checkbox {
+  margin-right: 10px;
+}

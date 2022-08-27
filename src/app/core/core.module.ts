@@ -9,6 +9,8 @@ import { EditPanelComponent } from './components/edit-panel/edit-panel.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingHttpComponent } from './components/loading-http/loading-http.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DetailsDialogComponent } from './components/details-dialog/details-dialog.component';
 
 
 
@@ -19,11 +21,14 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     EditPanelComponent,
     LoadingHttpComponent,
     ConfirmDialogComponent,
+    DynamicFormComponent,
+    DetailsDialogComponent,
   ],
   exports: [
     MenuComponent,
     BreakpointPipe,
     LoadingHttpComponent,
+    DynamicFormComponent,
   ],
   imports: [
     CommonModule,

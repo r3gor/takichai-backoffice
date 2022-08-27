@@ -1,47 +1,55 @@
 import { Validators } from '@angular/forms';
 import { IField } from '../../core/interfaces/field.interface';
 
-export const editFields: IField[]= [
+export const detailsFields: IField[]= [
+  {
+    key: "userId",
+    label: "User ID",
+    type: 'text',
+    disabled: true,
+  },
   {
     key: 'role',
     label: 'Role',
     type: 'select',
     options: [{value: 'USER', label: 'User'}, {label: 'Admin', value: 'ADMIN'}],
-    validators: [Validators.required],
+    disabled: true,
   },
   {
     key: 'name',
     label: 'Name',
     type: 'text',
-    validators: [Validators.required, Validators.minLength(1)]
+    disabled: true,
   },
   {
     key: 'email',
     label: 'Email',
     type: 'text',
     disabled: true,
-    validators: []
   },
   {
     key: 'description',
     label: 'Description',
     type: 'text',
-    validators: [Validators.required, Validators.minLength(4)]
+    disabled: true,
   },
   {
     key: 'publicProfile',
     label: 'Public',
     type: 'radio',
     options: [{label: 'True', value: true}, {label: 'False', value: false}],
-    validators: [Validators.required]
+    disabled: true,
   },
   {
-    optionalField: true,
-    optionalFieldLabel: 'Change password',
-    key: 'password',
-    label: 'New password',
+    key: "createdAt",
+    label: "Created At",
     type: 'text',
-    hint: 'This overides the previous password',
-    validators: []
+    disabled: true,
+  },
+  {
+    key: "updatedAt",
+    label: "Updated At",
+    type: 'text',
+    disabled: true,
   },
 ]

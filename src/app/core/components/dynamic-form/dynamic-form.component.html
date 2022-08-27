@@ -1,0 +1,45 @@
+<form [formGroup]="form">
+  <ng-container *ngFor="let field of _fields">
+
+    <ng-container *ngIf="field.optionalField">
+      <p>
+        <mat-checkbox (change)="handleOptionalInput(field.key, $event.checked)"></mat-checkbox>
+        <mat-label>{{field.optionalFieldLabel}}</mat-label>
+      </p>
+    </ng-container>
+
+    <ng-container *ngIf="existControl(field.key)">
+      <ng-container [ngSwitch]="field.type">
+
+        <p class="radio" *ngSwitchCase="'radio'">
+          <mat-label>{{field.label}}</mat-label>
+          <mat-radio-group [formControlName]="field.key">
+            <mat-radio-button *ngFor="let o of field.options" [value]="o.value">
+              {{o.label}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
+
+        <p *ngSwitchCase="'text'">
+          <mat-form-field>
+            <mat-label>{{field.label}}</mat-label>
+            <input matInput [formControlName]="field.key">
+            <mat-hint>{{field.hint}}</mat-hint>
+          </mat-form-field>
+        </p>
+      
+        <p *ngSwitchCase="'select'">
+          <mat-form-field>
+            <mat-label>{{field.label}}</mat-label>
+            <mat-select [formControlName]="field.key">
+              <mat-option *ngFor="let o of field.options" [value]="o.value">
+                {{o.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+</form>

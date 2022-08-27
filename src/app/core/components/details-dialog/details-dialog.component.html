@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Details</h2>
+<mat-dialog-content class="mat-typography">
+
+  <app-dynamic-form
+  [form]="form"
+  [fields]="data.fields"
+  ></app-dynamic-form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="{action: 'CANCEL'}">Close</button>
+</mat-dialog-actions>

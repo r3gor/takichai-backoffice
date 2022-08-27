@@ -30,8 +30,8 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="selectedItem=element; delete(element.songId)"><mat-icon>delete_forever</mat-icon></button>
-        <button mat-icon-button><mat-icon>more</mat-icon></button>
+        <button mat-icon-button (click)="selectedItem=element; delete(element.songId)"><mat-icon>delete_forever</mat-icon></button>
+        <button mat-icon-button (click)="selectedItem=element; details()"><mat-icon>more</mat-icon></button>
       </td>
     </ng-container>
 
