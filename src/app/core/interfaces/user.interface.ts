@@ -11,4 +11,5 @@ export interface IUser {
   updatedAt:      string;
   publicProfile:  boolean;
   userId:         string;
+  imgUrl:         string;
 }

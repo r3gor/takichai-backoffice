@@ -1,13 +1,61 @@
-<ng-container *ngIf="user$ | async as user">
-  <pre>{{user | json}}</pre>
-</ng-container>
+
+
+<!-- <ng-container > -->
+  <!-- <h1></h1> -->
+  <!-- <pre>{{user | json}}</pre> -->
+<!-- </ng-container> -->
+<!-- <mat-card *ngIf="user$ | async as user">
+  <mat-card-title>Welcome!</mat-card-title>
+  <h4>{{ user.name }}</h4>
+  {{user.description}}
+</mat-card> -->
+
+<!-- <h1>Dashboard</h1> -->
 
 <mat-card *ngIf="topPosters$ | async as topPosters">
-  <mat-card-title>TOP 5 Song Publisher</mat-card-title>
-  <mat-card-subtitle>Artists</mat-card-subtitle>
+  <mat-card-title>TOP Artits</mat-card-title>
+  <mat-card-subtitle>Biggest songs uploaded</mat-card-subtitle>
   
-  <div *ngFor="let p of topPosters.slice(0, 5)">
-    {{p.name}}
-  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let p of topPosters.slice(0, 5)">
+    <img *ngIf="p.imgUrl" matListAvatar [src]="p.imgUrl" >
+    <img *ngIf="!p.imgUrl" matListAvatar src="https://exhaciendacruzdecantera.com/img/rese%C3%B1as/user.png">
+      <div mat-line>{{p.name}}</div>
+      <div mat-line>{{p.email}}</div>
+      <div> {{p.songs.length}} </div>
+    </mat-list-item>
+  </mat-list>
+  
+</mat-card>
+
+<mat-card *ngIf="topListeneds$ | async as topListeneds">
+  <mat-card-title>Most Listeneds</mat-card-title>
+  <mat-card-subtitle>Songs with most full reproductions</mat-card-subtitle>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let p of topListeneds.slice(0, 5)">
+    <img *ngIf="p.imgUrl" matListAvatar [src]="p.imgUrl" >
+    <img *ngIf="!p.imgUrl" matListAvatar src="https://1000marcas.net/wp-content/uploads/2020/02/Logo-Itunes.png">
+      <div mat-line>{{p.name}}</div>
+      <div mat-line>{{p.genre}} - {{p.year}}</div>
+      <div> {{p.stats.fullReproductions}} </div>
+    </mat-list-item>
+  </mat-list>
+  
+</mat-card>
+
+<mat-card *ngIf="topFavs$ | async as topFavs">
+  <mat-card-title>Most Favorites</mat-card-title>
+  <mat-card-subtitle>Songs with most favorites</mat-card-subtitle>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let p of topFavs.slice(0, 5)">
+    <img *ngIf="p.imgUrl" matListAvatar [src]="p.imgUrl" >
+    <img *ngIf="!p.imgUrl" matListAvatar src="https://1000marcas.net/wp-content/uploads/2020/02/Logo-Itunes.png">
+      <div mat-line>{{p.name}}</div>
+      <div mat-line>{{p.genre}} - {{p.year}}</div>
+      <div> {{p.stats.likes.length}} </div>
+    </mat-list-item>
+  </mat-list>
   
 </mat-card>

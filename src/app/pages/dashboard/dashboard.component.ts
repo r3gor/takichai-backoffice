@@ -19,6 +19,14 @@ export class DashboardComponent implements OnInit {
     map(users => users.sort((a, b) =>  b.songs.length - a.songs.length)),
   );
 
+  topListeneds$ = this.repoService.songs$.pipe(
+    map(songs => songs.sort((a: any, b: any) =>  b.stats.fullReproductions - a.stats.fullReproductions)),
+  );
+
+  topFavs$ = this.repoService.songs$.pipe(
+    map(songs => songs.sort((a: any, b: any) =>  b.stats.likes.length - a.stats.likes.length)),
+  );
+
   constructor(
     private repoService: RepositoryService,
     private userService: UserService) {
