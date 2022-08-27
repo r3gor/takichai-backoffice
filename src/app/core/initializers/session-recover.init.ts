@@ -6,6 +6,7 @@ import { Initializer } from "./abstract-initializer";
 import { UserService } from "../services/user.service";
 import { HttpUsersService } from '../services/http/http-users.service';
 import { HttpErrorResponse } from "@angular/common/http";
+import { SnackMsgService } from '../services/ui/snack-msg.service';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class SessionRecoverInitializer implements Initializer{
 
   constructor(
     private userService: UserService,
+    private snackMsgService: SnackMsgService,
     private httpUsersService: HttpUsersService) {
   }
 
@@ -23,6 +25,7 @@ export class SessionRecoverInitializer implements Initializer{
       return this.existValidSession().pipe(
         tap( isValid => LOG.msg( isValid? "Recovered Session" : "Does Not Exist A Valid Session", "info") ),
         tap( isValid => isValid && this.userService.onRecoverSession() ),
+        tap( isValid => isValid && this.snackMsgService.msg("Welcome back", "success") ),
       );
     }
   }

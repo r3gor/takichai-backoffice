@@ -4,6 +4,7 @@ import { BehaviorSubject, filter, of, tap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { LS } from '../utils/local-storage.utils';
 import { HttpUsersService } from './http/http-users.service';
+import { RepositoryService } from './repository.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,11 @@ export class UserService {
 
   constructor(
     private httpUserService: HttpUsersService,
+    private repoService: RepositoryService,
     private router: Router) {
+      this.loggedIn$.subscribe(loggedIn => 
+        loggedIn && this.repoService.fetchAll().subscribe()
+      )
   }
 
   login(user: string, password: string) {
