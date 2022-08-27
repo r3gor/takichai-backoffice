@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
 import { SnackMsgService } from 'src/app/core/services/ui/snack-msg.service';
+import { ThemeService } from '../../core/services/ui/theme.service';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +19,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private userService: UserService,
     private snackService: SnackMsgService,
+    public themeService: ThemeService,
     private router: Router) { }
 
   ngOnInit(): void {

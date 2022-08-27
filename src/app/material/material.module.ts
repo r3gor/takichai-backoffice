@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -37,6 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatProgressBarModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule { }

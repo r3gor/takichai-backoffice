@@ -25,10 +25,13 @@ $dark-theme: mat.define-dark-theme((
 // Apply the dark theme by default
 @include mat.core-theme($dark-theme);
 @include mat.button-theme($dark-theme);
+@include mat.all-component-colors($dark-theme);
+
 
 .light-theme {
   @include mat.core-color($light-theme);
   @include mat.button-color($light-theme);
+  @include mat.all-component-colors($light-theme);
  }
 
 /* You can add global styles to this file, and also import other style files */

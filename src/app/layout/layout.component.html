@@ -16,7 +16,18 @@
          </button>
         <h1>Takichai Backoffice</h1>
       </ng-container>
+      <!-- <mat-slide-toggle
+      class="example-margin"
+      color="accent"
+      (change)="$event.checked? themeService.enableDark() : themeService.enableLight()"
+      [checked]="themeService.isDark$ | async">
+      <mat-icon>{{(themeService.isDark$ | async)? 'brightness_3':'brightness_7'}}</mat-icon>
+      </mat-slide-toggle> -->
+
       <div class="ml-auto">
+        <button mat-icon-button (click)="themeService.toggle()">
+          <mat-icon>{{(themeService.isDark$ | async)? 'brightness_7':'brightness_3'}}</mat-icon>
+        </button>
         <span class="mat-body-strong">Roger Ramos</span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>person</mat-icon>

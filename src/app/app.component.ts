@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Takichai Backoffice';
+
+  // @HostBinding('class') className = 'light-theme';
 
   constructor() {
   }

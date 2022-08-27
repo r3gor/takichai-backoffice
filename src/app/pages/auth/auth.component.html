@@ -1,3 +1,6 @@
+<button class="theme-toggle" mat-icon-button (click)="themeService.toggle()">
+  <mat-icon>{{(themeService.isDark$ | async)? 'brightness_7':'brightness_3'}}</mat-icon>
+</button>
 
 <mat-card>
   <mat-card-title>Login</mat-card-title>
